@@ -6,7 +6,7 @@ class criteriaItem():
         #A brief description of this critera, to be shown to the player
         self.description = description
         #The maximum marks that can be awarded
-        self.maximumScoring = maximumScoring
+        self.maximumScoring = int(maximumScoring)
         #Wether the player has to guess this correctly ()
         self.critical = critical
 
@@ -24,3 +24,5 @@ class criteriaItem():
 
     def checkMax(self):
         return(self.maximumScoring)
+
+# Dan Gorringe December 2017

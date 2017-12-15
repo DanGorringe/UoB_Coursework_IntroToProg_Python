@@ -27,7 +27,7 @@ class artifact():
     def answer(self):
         return(self.answer)
     def author(self):
-        return(str(self.author))
+        return(self.author)
 
     def display(self):
         print("The Question: " + str(self.question))
@@ -38,7 +38,7 @@ class artifact():
         print("Their answer is: " + str(self.answer))
 
     #Mark takes a list of player guesses which correspond to the list of criteria.
-    def mark(self):
+    def mark_manual(self):
         for i in range(len(self.criteriaValues)):
             playerAnswer = int(input("For " + str(self.criteriaList[i]) + " how many points out of an available " + str(self.criteriaList[i].checkMax()) + " are you awarding? "))
             #Check wether the criteria is critical and if player fails then fail them.
@@ -55,3 +55,22 @@ class artifact():
                 markingPoints = self.criteriaList[i].checkMax() - (self.criteriaValues[i] - playerAnswer)**2
                 print("You scored " + str(markingPoints) + " for how you marked " + str(self.criteriaList[i]) + " on " + str(self.author) + "'s piece of work'")
                 return(markingPoints)
+
+        def mark(self,answers):
+            for i in range(len(self.criteriaValues)):
+                if self.criteriaList[i].checkCritical() == True:
+                    print("Criteria is critical")
+                    if answer[i] !=  self.criteriaValues[i]:
+                        print("failed")
+                    if answer[i] ==  self.criteriaValues[i]:
+                        print("passed")
+                #Else the criteria is not crucial, return 'score'
+                else:
+                    #Have the 'score' proportional to the quasi chi-chi (square of the difference
+                    # Score = max - (actual - answer[i])^2
+                    markingPoints = self.criteriaList[i].checkMax() - (self.criteriaValues[i] - answer[i])**2
+                    print("You scored " + str(markingPoints) + " for how you marked " + str(self.criteriaList[i]) + " on " + str(self.author) + "'s piece of work'")
+                    return(markingPoints)
+
+
+# Dan Gorringe December 2017

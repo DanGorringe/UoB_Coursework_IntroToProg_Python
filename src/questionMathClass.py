@@ -30,3 +30,5 @@ class questionMathsSquare():
             return(1)
         else:
             return(0)
+
+# Dan Gorringe December 2017
