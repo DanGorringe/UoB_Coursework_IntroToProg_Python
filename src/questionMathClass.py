@@ -1,10 +1,12 @@
 import random
+from tkinter import *
+from tkinter import ttk
 
 class questionMathsBasic():
     def __init__(self,answer,extra):
         self.answer = answer
         self.extra = extra
-    def display(self):
+    def question(self):
         return("X + " + str(self.extra) + " = " + str(self.extra+self.answer) + ", what is X?")
     def answer(self):
         return(answer)
@@ -15,6 +17,10 @@ class questionMathsBasic():
             return(1)
         else:
             return(0)
+    def display(self):
+        questionWindow = Tk()
+        w = Label(questionWindow,text=self.question()).pack()
+        #questionWindow.mainloop()
 
 class questionMathsSquare():
     def __init__(self,answer):
