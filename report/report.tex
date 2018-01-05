@@ -68,7 +68,7 @@ It was my aim to have one 'guiding' python file, to tell the 'story' of the game
 \section{Tkinter}
 To make all the GUI elements I used TKinter\cite{TKinter}, which comes preinstalled with python. I had some issues when using their IntVars and StringVars, I believe this was due to a cocktail of both not knowing you need to use \texttt{.set} and \texttt{.get()} to change the variable and with some odd happenings with \texttt{.pack()} always returning 0, thus negating the intended \texttt{.get()} functionality.
   \subsection{command issues}
-  I Also had problems when trying to set the command of buttons, TKinter alone does not seem to like giving a functino with argument. So I had to use some functools wizard (the syntax of which I found online) to pass an argument so that I could mark a specific artifact. I also had to use lambda in another scenario and in another did not need to use it at all as was running a function inside a class with no argument.
+  I Also had problems when trying to set the command of buttons, TKinter alone does not seem to like giving a function with argument. So I had to use some functools wizard (the syntax of which I found online) to pass an argument so that I could mark a specific artifact. I also had to use lambda in another scenario and in another did not need to use it at all as was running a function inside a class with no argument.
 
 \section{Criteria}
 The simplest class that I created, hence it has not changed since December. They mearly contain a string of their name, a brief description, wether they are critical and what their maximum is. In the beginning I had intentions to deeply imbed plagarism, to force the player to root out all plagarists and award no marks. However as time slipped away so did my intentions of implementing, but you can still find variables for plagarism ready to be implemented. I instantiate these criteria at the start of the \texttt{game.py} file
@@ -82,7 +82,7 @@ Initally the answer was used just for the maths question, when I branched out to
   I also create psuedo random names for all artifacts. I made seperate text files for first names and surnames: I made sure to include all the members of S Club 7 and lecturers. I load these into arrays and randomly assign one of each to create the author. I use this same technique to randomise the person for which you owe losing 200 points if you incorrectly mark a maths artifact.
 
 \section{Questions}
-Each artifact has a question that it is for. The Question class is responsible for generating images. To work out how to produce these images I had to google tutorials, however I found lots of these missed out lots of details, so instead eneded up using the documentation for PIL\cite{PIL}. I came across funny nuances with the python image libary, one of which that it only likes gifs, so made sure to only save as gifs instead of the JPEGs that I did originally.
+Each artifact has a question that it is for. The Question class is responsible for generating images. To work out how to produce these images I had to google tutorials, however I found lots of these missed out details, so instead ended up using the documentation for PIL\cite{PIL}. I came across funny nuances with the python image libary, one of which that it only likes gifs, so made sure to only save as gifs instead of the JPEGs that I did originally.
   \subsection{Basic Maths}
   I started with a basic algebra question. To initialise you give it a random integer and an integer of the answer.
   \subsection{Sun picture}
