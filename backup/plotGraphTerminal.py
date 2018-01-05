@@ -34,4 +34,5 @@ for y in range(shutil.get_terminal_size().lines - 1):
         #Else empty space
         else:
             print(" ",end='')
-#for y in range(shutil.get_terminal_size)
+
+# Dan Gorringe January 2018
