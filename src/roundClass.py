@@ -40,15 +40,18 @@ class roundInfo():
         self.complete = False
         self.score = 0
 
+    # Find the assignment of the round
     def question(self):
         return(self.question.question())
 
+    # Start 'playing'
     def play(self):
         self.complete = False
         self.playQuestionDisplay()
         self.playArtifactDisplay()
         self.playProgressDisplay()
 
+    # Display the progress window
     def playProgressDisplay(self):
         self.progressWindow = Tk()
         self.progressWindow.title("Progress")
@@ -58,6 +61,7 @@ class roundInfo():
         self.progressRef = ttk.Progressbar(self.progressWindow,length=1000)
         self.progressRef.pack()
 
+    # Display the quesiton window
     def playQuestionDisplay(self):
         self.questionWindow = Tk()
         self.questionWindow.title("Assignment")
@@ -70,6 +74,7 @@ class roundInfo():
                 questionText = str(self.criteriaList[i]) + " out of a maximum of " + str(self.criteriaList[i].checkMax())
             w = Label(self.questionWindow,text=questionText).pack()
 
+    # Create a window for every artifact to be marked
     def playArtifactDisplay(self):
         for artifact in self.artifactList:
             self.spinboxValues[artifact] = []
@@ -94,6 +99,7 @@ class roundInfo():
             w = Button(artifactWindow,text="Mark",command=partial(self.playArtifactMark,artifact)).pack()
             self.artifactWindowDic[artifact] = artifactWindow
 
+    # Mark the artifact given
     def playArtifactMark(self,artifact):
 
         self.artifactWindowDic[artifact].update()
@@ -106,19 +112,21 @@ class roundInfo():
                     returningInfo[2].append(False)
                 else:
                     returningInfo[2].append(1)
+                    # Default score of 10 for a currect answer
                     returningInfo[1] += 10
             #Else the criteria is not crucial, return 'score'
             else:
                 returningInfo[2].append(self.spinboxValues[artifact][i].get())
-                #returningInfo[1] += int(self.criteriaList[i].checkMax()) - (int(artifact.criteriaValues[i]) - int(self.spinboxValues[artifact][i].get()))**2
                 returningInfo[1] += int(self.criteriaList[i].checkMax()) - int(((int(artifact.criteriaValues[i]) - int(self.spinboxValues[artifact][i].get()))**2)/(self.criteriaList[i].checkMax()/3))
-                #Have the 'score' proportional to the quasi chi-chi (square of the difference
-        #print("You allocated: " + str(returningInfo[2]) + " wheras " + str(artifact.author) + " deserved " + str(artifact.criteriaValues))
-        #print(returningInfo[1])
+        # Add dictionary entry for marked work
         self.markedArtifacts.update({artifact:returningInfo})
+        # Remove artifact from list of artifacts to be marked
         self.artifactList.remove(artifact)
+        # Delete the window
         self.artifactWindowDic[artifact].destroy()
+        # Increment progress bar
         self.progressRef.step(self.stepLength)
+        # If this was the last piece to be marked enter finishing funciton
         if self.artifactList == []:
             self.finishedMarking()
 
@@ -126,34 +134,44 @@ class roundInfo():
     def artifactCreation(self,quantity):
         self.stepLength = 99/quantity
         for i in range(quantity):
-            #save the markee answer in a variable to use twice
+            #get the markee answer
             markeeAnswer = self.question.markeeAnswer()
+            # Create criteriavalues suitable for their criteria
             myCriteriaValues = []
             for criteria in self.criteriaList:
                 if criteria.checkCritical() == True:
                     myCriteriaValues.append(self.question.answerMark(markeeAnswer))
                 else:
                     myCriteriaValues.append(random.randint(0,self.criteriaList[1].checkMax()))
+            # Creating the artifact
             self.artifactList.append(artifact(self.question,markeeAnswer,(nameFirst[random.randint(1,len(nameFirst)-1)] + " " + nameLast[random.randint(1,len(nameLast)-1)]),self.criteriaList,myCriteriaValues))
+            # Creating the corresponding image
             self.question.createImage(self.artifactList[i])
 
     def artifactScoreAppend(self,returningInfo):
         score += returningInfo[1]
         print(str(score))
 
-    #Breakdown of how well you mar:
+    #Breakdown of how well you marked
 
     def finishedMarking(self):
+        # Set inital score
         self.score = 0
+        # Set round to complete
         self.complete = True
+        # Sum score
         for artifact in self.markedArtifacts:
             self.score += self.markedArtifacts[artifact][1]
+        # delete windows
         self.questionWindow.destroy()
         self.progressWindow.destroy()
+        # Create debriefing window
         completionWindow = Tk()
         completionWindow.title("Debrief")
+        # Passes as default
         passed = True
         for artifact in self.markedArtifacts:
+            # If the first artifact incorrectly marked set passed to Flse, and accompany with appropriate label
             if self.markedArtifacts[artifact][0] == False:
                 if passed == True:
                     passed = False
@@ -173,9 +191,6 @@ class roundInfo():
             for artifact in self.markedArtifacts:
                 text2Print = "You gained " + str(self.markedArtifacts[artifact][1]) + " marks, for how you scored " + str(artifact.author) + "'s work"
                 Label(completionWindow,text=text2Print).pack()
-
-        #print(self.scoreReturn)
-        #self.scoreReturn()
         text2Print = "And after all your ardous marking you only obtained: "+str(self.score)+" marks"
         Label(completionWindow,text=text2Print,wraplength=1000).pack()
         Button(completionWindow,text="finish",command=lambda:completionWindow.destroy()).pack()

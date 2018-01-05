@@ -28,16 +28,6 @@ root = Tk()
 root.title("Welcome")
 w = Label(root,text="Welcome to Marking Simulator 2018").pack()
 
-#testQuestion = questionSun()
-#testRound = roundInfo(testQuestion,[complexityCriteria,onTopicCritera])
-#testRound.artifactCreation(2)
-#testRound.play()
-#
-#testQuestion = createBasicMathsQuestion()
-#testRound = roundInfo(testQuestion,[correctnessCriteria,creativeFlaireCriteria])
-#testRound.artifactCreation(2)
-#testRound.play()
-
 class menuClass():
     def __init__(self):
         self.menuButton = []
@@ -91,12 +81,9 @@ class menuClass():
             button.pack()
 
 
-global m
 m = menuClass()
 m.display()
-#print(roundDic)
 
-#artifactWindow.mainloop()
 root.mainloop()
 
 # Dan Gorringe January 2018

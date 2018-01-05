@@ -3,8 +3,6 @@ from tkinter import ttk
 
 class artifact():
 
-    global roundDic
-
     def __init__(self,question,answer,author,criteriaList,criteriaValues,plagaristBool=False,plagiristAccomplice="none",markSpinboxs=[]):
         #The question
         self.question = question
