@@ -2,6 +2,8 @@ import random
 from tkinter import *
 from tkinter import ttk
 
+from PIL import ImageFont, ImageDraw, Image
+
 class questionMathsBasic():
     def __init__(self,answer,extra):
         self.answer = answer
@@ -22,6 +24,14 @@ class questionMathsBasic():
         w = Label(questionWindow,text=self.question()).pack()
         #questionWindow.mainloop()
 
+    def createImage(self,artifact):
+        image = Image.new("RGB", (20, 15), "White")
+        draw = ImageDraw.Draw(image)
+        font = ImageFont.truetype("FreeMono.ttf",15)
+        draw.text((0,0),str(artifact.answer),font=font,fill="Black")
+        #image.save(,str(artifact.answer)+".jpg","JPEG")
+        image.save("./data/answers/"+str(artifact.answer)+".gif")
+
 class questionMathsSquare():
     def __init__(self,answer):
         self.answer = answer
@@ -37,4 +47,6 @@ class questionMathsSquare():
         else:
             return(0)
 
-# Dan Gorringe December 2017
+
+
+# Dan Gorringe January 2018

@@ -1,0 +1,11 @@
+son
+daughter
+husband
+wife
+brother
+sister
+sibling
+cousin
+second cousin
+niece
+nephew

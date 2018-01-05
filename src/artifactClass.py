@@ -105,4 +105,4 @@ class artifact():
 
 
 
-# Dan Gorringe December 2017
+# Dan Gorringe January 2018
